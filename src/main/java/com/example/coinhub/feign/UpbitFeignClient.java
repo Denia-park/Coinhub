@@ -9,6 +9,6 @@ import java.util.List;
 
 @FeignClient(name = "upbit", url = "https://api.upbit.com/v1")
 public interface UpbitFeignClient {
-    @GetMapping("/ticker?markets=KRW-BTC")
+    @GetMapping("/ticker")
     List<UpbitCoinPrice> getCoinPrice(@RequestParam("markets") String coin);
 }

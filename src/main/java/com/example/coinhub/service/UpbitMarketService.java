@@ -11,8 +11,9 @@ public class UpbitMarketService implements MarketService{
     UpbitFeignClient upbitFeignClient;
     @Override
     public double getCoinCurrentPrice(String coin) {
-        return upbitFeignClient.getCoinPrice("KRW-"+coin.toUpperCase())
+        return upbitFeignClient.getCoinPrice("KRW-" + coin.toUpperCase())
                 .get(0)
+                .getTrade_price();
     }
 
 }

@@ -1,9 +1,8 @@
 package com.example.coinhub.model;
 
-
 import lombok.Getter;
 
 @Getter
-public class UpbitCoinPrice {
-    private double trade_price;
+public class BithumbCoinPrice {
+    private String closing_price;
 }
