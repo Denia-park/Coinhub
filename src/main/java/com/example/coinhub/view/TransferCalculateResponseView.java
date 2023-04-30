@@ -1,9 +1,11 @@
 package com.example.coinhub.view;
 
+import com.example.coinhub.dto.TransferCalculateDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Map;
+
 @Getter
 @AllArgsConstructor
 public class TransferCalculateResponseView {
@@ -11,4 +13,14 @@ public class TransferCalculateResponseView {
     private double amount;
     private Map<Double, Double> buyOrderBook;
     private Map<Double, Double> sellOrderBook;
+
+    //DTO -> View
+    public static TransferCalculateResponseView of(TransferCalculateDTO dto) {
+        return new TransferCalculateResponseView(
+                dto.getCoin(),
+                dto.getAmount(),
+                dto.getBuyOrderBook(),
+                dto.getSellOrderBook()
+        );
+    }
 }
