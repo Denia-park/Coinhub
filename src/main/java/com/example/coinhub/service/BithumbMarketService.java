@@ -1,13 +1,17 @@
 package com.example.coinhub.service;
 
 import com.example.coinhub.feign.BithumbFeignClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-public class BithumbMarketService implements MarketService{
-    @Autowired
-    BithumbFeignClient bithumbFeignClient;
+@RequiredArgsConstructor
+public class BithumbMarketService implements MarketService {
+    private final BithumbFeignClient bithumbFeignClient;
+
     @Override
     public double getCoinCurrentPrice(String coin) {
         String value = bithumbFeignClient.getCoinPrice(coin.toUpperCase() + "_KRW")
@@ -15,5 +19,18 @@ public class BithumbMarketService implements MarketService{
                 .getClosing_price();
 
         return Double.parseDouble(value);
+    }
+
+    @Override
+    public List<String> getCoins() {
+        //API 활용해서 가져와야지
+        List<String> result = new ArrayList<>();
+        bithumbFeignClient.getAssetStatus().getData().forEach((k, v) -> {
+            if (v.getDeposit_status() == 1 && v.getWithdrawal_status() == 1) {
+                result.add(k.toUpperCase());
+            }
+        });
+
+        return result;
     }
 }
