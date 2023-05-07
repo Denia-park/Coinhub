@@ -2,7 +2,9 @@ package com.example.coinhub.service;
 
 import com.example.coinhub.dto.CoinBuyDTO;
 import com.example.coinhub.dto.CoinSellDTO;
+import com.example.coinhub.feign.UpbitFeeFeignClient;
 import com.example.coinhub.feign.UpbitFeignClient;
+import com.example.coinhub.model.UpbitEachWithdrawalFee;
 import com.example.coinhub.model.UpbitOrderBooks;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,11 +13,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UpbitMarketService implements MarketService {
     private final UpbitFeignClient upbitFeignClient;
+    private final UpbitFeeFeignClient upbitFeeFeignClient;
 
     @Override
     public double getCoinCurrentPrice(String coin) {
@@ -124,5 +128,12 @@ public class UpbitMarketService implements MarketService {
         return new CoinSellDTO(amounts, orderBooks);
     }
 
-
+    public Map<String /*Coin Name*/ , Double/* Withdrawal Fee */> calculateFee() throws Exception {
+        return upbitFeeFeignClient.getWithdrawalFee().getData()
+                .stream()
+                .collect(Collectors.toMap(
+                        UpbitEachWithdrawalFee::getCurrency,
+                        UpbitEachWithdrawalFee::getWithdrawFee
+                ));
+    }
 }
