@@ -1,4 +1,4 @@
-package com.example.coinhub.service;
+package com.example.coinhub.service.bitumb;
 
 import com.example.coinhub.dto.CoinBuyDTO;
 import com.example.coinhub.dto.CoinSellDTO;
@@ -6,6 +6,7 @@ import com.example.coinhub.feign.BithumbFeignClient;
 import com.example.coinhub.feign.response.BithumbResponse;
 import com.example.coinhub.model.BithumbAssetEachStatus;
 import com.example.coinhub.model.BithumbCoinPrice;
+import com.example.coinhub.service.BithumbMarketService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

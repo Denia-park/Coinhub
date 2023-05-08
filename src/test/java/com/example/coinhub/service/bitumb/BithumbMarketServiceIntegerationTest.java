@@ -1,5 +1,6 @@
-package com.example.coinhub.service;
+package com.example.coinhub.service.bitumb;
 
+import com.example.coinhub.service.BithumbMarketService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
