@@ -93,7 +93,7 @@ class BithumbMarketServiceTest {
         when(bithumbFeignClient.getOrderBook()).thenReturn(mockOrderBook);
 
         // when
-        CoinSellDTO result = bithumbMarketService.calculateSell(new CoinBuyDTO(amounts, null));
+        CoinSellDTO result = bithumbMarketService.calculateSell(amounts);
 
         // then
         assertEquals(4 + 2 + 1 * 0.5, result.getAmounts().get("A"));

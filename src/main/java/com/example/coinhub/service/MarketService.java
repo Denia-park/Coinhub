@@ -13,7 +13,7 @@ public interface MarketService {
 
     CoinBuyDTO calculateBuy(List<String> commonCoins, double amount);
 
-    CoinSellDTO calculateSell(CoinBuyDTO buyDTO);
+    CoinSellDTO calculateSell(Map<String, Double> amounts);
 
     Map<String /*Coin Name*/ , Double/* Withdrawal Fee */> calculateFee() throws Exception;
 }
